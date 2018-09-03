@@ -18,3 +18,8 @@ RUN apt-get -y update && \
     apt-get -y purge && \
     apt-get -y autoremove && \
     apt-get -y autoclean
+
+# nginx start at the user home location
+ENTRYPOINT \
+    nginx -p /home/onser && \
+    tor
