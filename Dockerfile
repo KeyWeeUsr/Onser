@@ -26,24 +26,29 @@ RUN mkdir -p /var/lib/nginx/body && \
     mkdir -p /var/lib/nginx/uwsgi && \
     mkdir -p /var/lib/nginx/scgi
 
+# create volume for web content
+VOLUME ['/home/onser/www']
+
+# copy custom NGINX config
 COPY nginx.conf /home/onser/nginx.conf
 
+# copy available web content into container
+COPY www/* /home/onser/www/
+
+# configure Tor to run .onion service
 RUN echo 'HiddenServiceDir /home/onser/www' >> /etc/tor/torrc && \
     echo 'HiddenServiceVersion 3' >> /etc/tor/torrc && \
     echo 'HiddenServicePort 80 127.0.0.1:6666' >> /etc/tor/torrc
 
-USER onser
-
-# make folder for web content
-RUN mkdir /home/onser/www
-RUN echo '!'> /home/onser/www/index.html
-
+# chown mouted folder for user
 # fix too permissive permissions before running the service
-RUN chmod 0700 /home/onser/www && \
-    chmod 0644 /home/onser/www/*
+RUN chown -R onser:onser /home/onser/www && \
+    chmod -R 0644 /home/onser/www && \
+    chmod 0700 /home/onser/www
 
-# nginx start at the user home location
+# start NGINX at the user home location
 ENTRYPOINT \
     nginx -t -c /home/onser/nginx.conf && \
     nginx -c /home/onser/nginx.conf -p /home/onser && \
     tor
+USER onser
