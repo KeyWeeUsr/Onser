@@ -28,19 +28,19 @@ RUN mkdir -p /var/lib/nginx/body && \
 
 COPY nginx.conf /home/onser/nginx.conf
 
-RUN echo 'HiddenServiceDir /home/onser/onser' >> /etc/tor/torrc && \
+RUN echo 'HiddenServiceDir /home/onser/www' >> /etc/tor/torrc && \
     echo 'HiddenServiceVersion 3' >> /etc/tor/torrc && \
     echo 'HiddenServicePort 80 127.0.0.1:6666' >> /etc/tor/torrc
 
 USER onser
 
 # make folder for web content
-RUN mkdir /home/onser/onser
-RUN echo '!'> /home/onser/onser/index.html
+RUN mkdir /home/onser/www
+RUN echo '!'> /home/onser/www/index.html
 
 # fix too permissive permissions before running the service
-RUN chmod 0700 /home/onser/onser && \
-    chmod 0644 /home/onser/onser/*
+RUN chmod 0700 /home/onser/www && \
+    chmod 0644 /home/onser/www/*
 
 # nginx start at the user home location
 ENTRYPOINT \
