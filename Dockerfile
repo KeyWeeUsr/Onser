@@ -19,9 +19,6 @@ RUN apt-get -y update && \
     apt-get -y autoremove && \
     apt-get -y autoclean
 
-RUN mkdir /home/onser/onser
-RUN echo '!'> /home/onser/onser/index.html
-
 # fix NGINX permission errors when running as non-root
 RUN mkdir -p /var/lib/nginx/body && \
     mkdir -p /var/lib/nginx/proxy && \
@@ -36,6 +33,10 @@ RUN echo 'HiddenServiceDir /home/onser/onser' >> /etc/tor/torrc && \
     echo 'HiddenServicePort 80 127.0.0.1:6666' >> /etc/tor/torrc
 
 USER onser
+
+# make folder for web content
+RUN mkdir /home/onser/onser
+RUN echo '!'> /home/onser/onser/index.html
 
 # nginx start at the user home location
 ENTRYPOINT \
