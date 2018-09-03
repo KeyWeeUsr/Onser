@@ -25,6 +25,8 @@ RUN echo 'HiddenServiceDir /home/onser/onser' >> /etc/tor/torrc && \
     echo 'HiddenServiceVersion 3' >> /etc/tor/torrc && \
     echo 'HiddenServicePort 80 127.0.0.1:6666' >> /etc/tor/torrc
 
+USER onser
+
 # nginx start at the user home location
 ENTRYPOINT \
     nginx -c /home/onser/nginx.conf -p /home/onser && \
