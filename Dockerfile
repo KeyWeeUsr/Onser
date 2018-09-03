@@ -37,7 +37,7 @@ COPY www/* /home/onser/www/
 
 # configure Tor to run .onion service
 RUN echo 'HiddenServiceDir /home/onser/www' >> /etc/tor/torrc && \
-    echo 'HiddenServiceVersion 3' >> /etc/tor/torrc && \
+    echo 'HiddenServiceVersion 2' >> /etc/tor/torrc && \
     echo 'HiddenServicePort 80 127.0.0.1:6666' >> /etc/tor/torrc
 
 # chown mouted folder for user
