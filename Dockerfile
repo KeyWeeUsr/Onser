@@ -22,6 +22,12 @@ RUN apt-get -y update && \
 RUN mkdir /home/onser/onser
 RUN echo '!'> /home/onser/onser/index.html
 
+# fix NGINX permission errors when running as non-root
+RUN mkdir -p /var/lib/nginx/body && \
+    mkdir -p /var/lib/nginx/proxy && \
+    mkdir -p /var/lib/nginx/fastcgi && \
+    mkdir -p /var/lib/nginx/uwsgi && \
+    mkdir -p /var/lib/nginx/scgi
 
 COPY nginx.conf /home/onser/nginx.conf
 
