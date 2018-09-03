@@ -19,7 +19,9 @@ RUN apt-get -y update && \
     apt-get -y autoremove && \
     apt-get -y autoclean
 
+COPY nginx.conf /home/onser/nginx.conf
+
 # nginx start at the user home location
 ENTRYPOINT \
-    nginx -p /home/onser && \
+    nginx -c /home/onser/nginx.conf -p /home/onser && \
     tor
