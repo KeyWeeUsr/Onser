@@ -9,8 +9,15 @@ then
 fi
 clear
 
+docker volume create --name onser_volume
+if [ "$?" ]
+then
+    exit 1
+fi
+
 docker run \
     --detach \
     --interactive \
     --tty \
+    --volume onser_volume:/home/onser/www \
     onser:latest

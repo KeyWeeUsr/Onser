@@ -26,9 +26,6 @@ RUN mkdir -p /var/lib/nginx/body && \
     mkdir -p /var/lib/nginx/uwsgi && \
     mkdir -p /var/lib/nginx/scgi
 
-# create volume for web content
-VOLUME ['/home/onser/www']
-
 # copy custom NGINX config
 COPY nginx.conf /home/onser/nginx.conf
 
