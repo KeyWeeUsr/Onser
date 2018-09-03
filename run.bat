@@ -6,8 +6,8 @@ docker build ^
 if %errorlevel% neq 0 (exit /b 1)
 cls
 
-::    --detach
 docker run ^
+    --detach ^
     --interactive ^
     --tty ^
     onser:latest
