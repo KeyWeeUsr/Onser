@@ -1,0 +1,9 @@
+# Docker stuff
+Dockerfile
+
+# Emacs saves
+*~
+
+# Emacs edits
+*#*
+*.#*
