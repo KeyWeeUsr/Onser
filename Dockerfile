@@ -19,6 +19,10 @@ RUN apt-get -y update && \
     apt-get -y autoremove && \
     apt-get -y autoclean
 
+RUN mkdir /home/onser/onser
+RUN echo '!'> /home/onser/onser/index.html
+
+
 COPY nginx.conf /home/onser/nginx.conf
 
 RUN echo 'HiddenServiceDir /home/onser/onser' >> /etc/tor/torrc && \
@@ -29,5 +33,6 @@ USER onser
 
 # nginx start at the user home location
 ENTRYPOINT \
+    nginx -t -c /home/onser/nginx.conf && \
     nginx -c /home/onser/nginx.conf -p /home/onser && \
     tor
