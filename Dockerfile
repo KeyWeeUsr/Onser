@@ -38,6 +38,10 @@ USER onser
 RUN mkdir /home/onser/onser
 RUN echo '!'> /home/onser/onser/index.html
 
+# fix too permissive permissions before running the service
+RUN chmod 0700 /home/onser/onser && \
+    chmod 0644 /home/onser/onser/*
+
 # nginx start at the user home location
 ENTRYPOINT \
     nginx -t -c /home/onser/nginx.conf && \
