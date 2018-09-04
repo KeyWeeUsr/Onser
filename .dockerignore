@@ -1,5 +1,8 @@
 # Docker stuff
 Dockerfile
+docker-compose.yml
+run.sh
+run.bat
 
 # Emacs saves
 *~
