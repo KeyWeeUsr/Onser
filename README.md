@@ -20,6 +20,32 @@ Based on NGINX and latest Tor.
 8. Enjoy
 
 
+### Multiple services
+
+You can use ``docker-compose.yml`` to run multiple separate onion services with
+multiple ``www`` folders set via build argument ``www_folder`` (similarly
+``nginx_conf``). See the default compose file.
+
+To build and run the services you need just a single command:
+
+    docker-compose up -d
+
+which will build the images and run the containers.
+
+To get the .onion URLs use:
+
+    docker-compose exec one cat www/hostname
+    docker-compose exec two cat www/hostname
+    docker-compose exec three cat www/hostname
+
+Each service has a separate volume specified in the compose file thus holds
+a unique ``private_key`` for the service.
+
+To remove containers, volumes, images, networks use:
+
+    docker-compose down --volumes --rmi all
+
+
 ### Custom permissions
 
 To modify the permissions to your liking you can use this example:
@@ -33,6 +59,15 @@ To modify the permissions to your liking you can use this example:
     # folder + files
     RUN chmod -R 0123 /home/onser/www
     USER onser
+
+
+### Issues
+
+Sometimes building the Docker image fails due to importing the ``gpg`` keys.
+
+    gpg: directory '/root/.gnupg' created
+    gpg: keybox '/root/.gnupg/pubring.kbx' created
+    gpg: keyserver receive failed: Cannot assign requested address
 
 
 ### Disclaimer
