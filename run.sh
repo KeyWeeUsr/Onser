@@ -1,6 +1,8 @@
 docker build \
     --tag keyweeusr/onser:latest \
     --file Dockerfile \
+    --build-arg www_folder=www \
+    --build-arg nginx_conf=nginx.conf \
     "$(pwd)"
 
 if [ "$?" ]

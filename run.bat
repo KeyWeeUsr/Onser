@@ -1,6 +1,8 @@
 docker build ^
     --tag keyweeusr/onser:latest ^
     --file Dockerfile ^
+    --build-arg www_folder=www ^
+    --build-arg nginx_conf=nginx.conf ^
     "%cd%"
 
 if %errorlevel% neq 0 (exit /b 1)
