@@ -9,7 +9,10 @@ RUN apt-get -y update && \
         >> /etc/apt/sources.list && \
     echo 'deb-src https://deb.torproject.org/torproject.org stretch main' \
         >> /etc/apt/sources.list && \
-    gpg --keyserver hkp://pool.sks-keyservers.net \
+    apt-get -y purge && \
+    apt-get -y autoremove && \
+    apt-get -y autoclean
+RUN gpg --keyserver hkp://pool.sks-keyservers.net \
         --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 && \
     gpg --keyserver hkp://pool.sks-keyservers.net \
         --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add - && \
