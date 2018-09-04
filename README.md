@@ -24,7 +24,7 @@ Based on NGINX and latest Tor.
 
 To modify the permissions to your liking you can use this example:
 
-    FROM onser:<tag>
+    FROM keyweeusr/onser:<tag>
     USER root
 
     # folder

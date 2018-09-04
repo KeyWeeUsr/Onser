@@ -1,5 +1,5 @@
 docker build ^
-    --tag onser:latest ^
+    --tag keyweeusr/onser:latest ^
     --file Dockerfile ^
     "%cd%"
 
@@ -14,4 +14,4 @@ docker run ^
     --interactive ^
     --tty ^
     --volume onser_volume:/home/onser/www ^
-    onser:latest
+    keyweeusr/onser:latest
