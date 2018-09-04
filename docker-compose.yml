@@ -1,0 +1,42 @@
+version: '3'
+services:
+    one:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                www_folder: www
+                nginx_conf: nginx.conf
+        image: keyweeusr/onser:one
+        volumes:
+            - onser_volume_one:/home/onser/www
+        restart: on-failure
+
+    two:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                www_folder: www2
+                nginx_conf: nginx.conf
+        image: keyweeusr/onser:two
+        volumes:
+            - onser_volume_two:/home/onser/www
+        restart: on-failure
+
+    three:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                www_folder: www3
+                nginx_conf: nginx.conf
+        image: keyweeusr/onser:three
+        volumes:
+            - onser_volume_three:/home/onser/www
+        restart: on-failure
+
+volumes:
+    onser_volume_one:
+    onser_volume_two:
+    onser_volume_three:

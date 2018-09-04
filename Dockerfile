@@ -27,10 +27,12 @@ RUN mkdir -p /var/lib/nginx/body && \
     mkdir -p /var/lib/nginx/scgi
 
 # copy custom NGINX config
-COPY nginx.conf /home/onser/nginx.conf
+ARG nginx_conf
+COPY $nginx_conf /home/onser/nginx.conf
 
 # copy available web content into container
-COPY www/* /home/onser/www/
+ARG www_folder
+COPY $www_folder/* /home/onser/www/
 
 # configure Tor to run .onion service
 RUN echo 'HiddenServiceDir /home/onser/www' >> /etc/tor/torrc && \

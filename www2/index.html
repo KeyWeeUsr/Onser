@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Onser :: Index 2</title>
+    </head>
+    <body>
+        <h1>Place your files here.</h1>
+
+        <p>By default the permissions will be changed this way:
+
+        <ul>
+            <li>
+                <code>www</code> folder permissions
+                to 0700 (user: rwx, group: ---, others: ---)
+            </li>
+            <li>
+                the contents of the <code>www</code> folder
+                to 0644 (user: rw-, group: r--, others: r--).
+            </li>
+        </ul>
+
+        <p>Feel free to change the permissions via "inheritting" from
+            the original <code>Dockerfile</code> with
+            <code>FROM keyweeusr/onser:&lt;tag&gt;</code> instruction
+            and modify the permissions like this:
+
+        <p><code>
+            FROM keyweeusr/onser:&lt;tag&gt;<br>
+            USER root<br><br>
+
+            # folder<br>
+            RUN chmod 0123 /home/onser/www<br><br>
+
+            # folder + files<br>
+            RUN chmod -R 0123 /home/onser/www<br><br>
+            USER onser<br>
+        </code>
+    </body>
+</html>
