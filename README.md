@@ -46,6 +46,18 @@ To remove containers, volumes, images, networks use:
     docker-compose down --volumes --rmi all
 
 
+### Default permissions
+
+By default the permissions will be changed during the Docker image build
+this way:
+
+* `www` folder permissions to `0700`
+    (user: rwx, group: ---, others: ---)
+
+* the contents of the `www` folder to `0644`
+    (user: rw-, group: r--, others: r--).
+
+
 ### Custom permissions
 
 To modify the permissions to your liking you can use this example:
